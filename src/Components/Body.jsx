@@ -6,21 +6,22 @@ const Body = () => {
         alt="bg-img"
       />
       <div className="absolute top-0 w-full h-full bg-black bg-opacity-55"></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-2/3 text-white flex flex-col items-center gap-3">
-        <h1 className="font-bold text-5xl">
+
+      <div className="absolute mt-80 top-0 right-0 left-0 text-white flex flex-col items-center">
+        <h1 className="font-extrabold text-5xl mb-6">
           Unlimited movies, TV shows and more
         </h1>
-        <p className="text-2xl">Watch anywhere. Cancel anytime</p>
-        <p className="text-xl">
+        <p className="text-2xl mb-6">Watch anywhere. Cancel anytime</p>
+        <p className="text-xl mb-4">
           Ready to watch? Enter your email to create or restart your membership.
         </p>
-        <div className="flex gap-6">
+        <div className="flex gap-6 ">
           <input
             type="text"
-            className="bg-transparent w-96 px-4 border"
+            className="bg-black bg-opacity-55 w-96 px-6 text-base border border-red-900 placeholder:text-base font-normal"
             placeholder="Email address"
           />
-          <button className="bg-[#c11119] px-10 py-4 rounded-md">
+          <button className="bg-[#c11119] text-xl font-semibold px-10 py-4 rounded-md">
             Get Started{" "}
           </button>
         </div>
