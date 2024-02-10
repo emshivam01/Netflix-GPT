@@ -9,19 +9,31 @@ const Signup = () => {
       />
       <div className="absolute top-0 w-full h-full bg-black bg-opacity-55"></div>
 
-      <form className="w-1/4 bg-black absolute top-0 right-0 left-0 mx-auto mt-64 p-4 px-12 rounded-md  text-white  ">
+      <form className="w-[22%] bg-black opacity-80 absolute top-0 right-0 left-0 mx-auto mt-48 p-12 py-16 rounded-md  text-white  ">
         <h1 className="text-4xl mb-10"> Sign up</h1>
         <input
-          className="w-full p-2 mb-8 rounded bg-transparent border "
+          className="w-full p-4 text-xl font-semibold  mb-8 rounded bg-transparent border "
+          type=" text"
+          placeholder="Full name"
+        />
+        <input
+          className="w-full p-4 text-xl font-semibold  mb-8 rounded bg-transparent border "
           type=" email"
           placeholder="Email address"
         />
+
         <input
-          className="w-full p-2 mb-8 rounded bg-transparent border "
+          className="w-full p-4 text-xl font-semibold  mb-8 rounded bg-transparent border "
           type=" password"
           placeholder="Password"
         />
-        <button className="w-full px-6 py-4 bg-[#c11119]">Sign up</button>
+        <button className="w-full  px-6 text-base font-medium  py-4 bg-[#c11119]">
+          Sign up
+        </button>
+        <p className="mt-12 cursor-pointer">
+          Already registered?{" "}
+          <span className="hover:underline font-medium"> Sign in</span>
+        </p>
       </form>
     </div>
   );
