@@ -1,25 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { ValidateCredentials } from "../utils/validateCredentials";
-
-const Signup = () => {
+const Signin = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [showError, setShowError] = useState(null);
-
-  const handleSignup = (e) => {
-    e.preventDefault();
-    const status = ValidateCredentials(email, password);
-
-    if (status === null) {
-      setShowError(status);
-      console.log("Everything is fine");
-    } else {
-      setShowError(status);
-      console.log("There's a issue");
-    }
-  };
 
   return (
     <div className="relative">
@@ -29,25 +14,15 @@ const Signup = () => {
       />
       <div className="absolute top-0 w-full h-full bg-black bg-opacity-55"></div>
 
-      <form
-        onSubmit={handleSignup}
-        className="w-[400px] bg-black bg-opacity-75 absolute top-0 right-0 left-0 mx-auto mt-40 px-12 py-14 rounded-md  text-white  "
-      >
-        <h1 className="text-4xl font-semibold mb-10"> Sign up</h1>
-
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-4 py-3  text-lg border-[#c11119] font-medium  mb-8 rounded bg-transparent border "
-          type=" email"
-          placeholder="Name"
-        />
+      <form className="w-[400px] bg-black bg-opacity-75 absolute top-0 right-0 left-0 mx-auto mt-40 px-12 py-14 rounded-md  text-white  ">
+        <h1 className="text-4xl font-semibold mb-10"> Sign in</h1>
 
         <input
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           className="w-full px-4 py-3  text-lg border-[#c11119] font-medium  mb-8 rounded bg-transparent border "
           type=" email"
-          placeholder="Email address"
+          placeholder="Email"
         />
 
         <input
@@ -68,9 +43,9 @@ const Signup = () => {
           Sign up
         </button>
         <p className="mt-10 cursor-pointer">
-          Already registered?{" "}
-          <Link to="/signin">
-            <button className="hover:underline font-medium"> Sign in</button>
+          New to Netflix?
+          <Link to="/signup">
+            <span className="hover:underline font-medium"> Sign up now</span>
           </Link>
         </p>
       </form>
@@ -78,4 +53,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Signin;
