@@ -2,23 +2,32 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { ValidateCredentials } from "../utils/validateCredentials";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const Signup = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(null);
 
   const handleSignup = (e) => {
     e.preventDefault();
     const status = ValidateCredentials(email, password);
 
-    if (status === null) {
-      setShowError(status);
-      console.log("Everything is fine");
-    } else {
-      setShowError(status);
-      console.log("There's a issue");
-    }
+    if (status) return;
+
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage, errorCode);
+      });
   };
 
   return (
@@ -36,9 +45,9 @@ const Signup = () => {
         <h1 className="text-4xl font-semibold mb-10"> Sign up</h1>
 
         <input
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
           className="w-full px-4 py-3  text-lg border-[#c11119] font-medium  mb-8 rounded bg-transparent border "
-          type=" email"
+          type="text"
           placeholder="Name"
         />
 
@@ -47,7 +56,7 @@ const Signup = () => {
           value={email}
           className="w-full px-4 py-3  text-lg border-[#c11119] font-medium  mb-8 rounded bg-transparent border "
           type=" email"
-          placeholder="Email address"
+          placeholder="Email "
         />
 
         <input

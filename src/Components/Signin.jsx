@@ -1,10 +1,33 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { ValidateCredentials } from "../utils/validateCredentials";
+
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Signin = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(null);
+
+  const handleSignin = (e) => {
+    e.preventDefault();
+    const status = ValidateCredentials(email, password);
+
+    if (status) return;
+
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+  };
 
   return (
     <div className="relative">
@@ -14,7 +37,10 @@ const Signin = () => {
       />
       <div className="absolute top-0 w-full h-full bg-black bg-opacity-55"></div>
 
-      <form className="w-[400px] bg-black bg-opacity-75 absolute top-0 right-0 left-0 mx-auto mt-40 px-12 py-14 rounded-md  text-white  ">
+      <form
+        onSubmit={handleSignin}
+        className="w-[400px] bg-black bg-opacity-75 absolute top-0 right-0 left-0 mx-auto mt-40 px-12 py-14 rounded-md  text-white  "
+      >
         <h1 className="text-4xl font-semibold mb-10"> Sign in</h1>
 
         <input
