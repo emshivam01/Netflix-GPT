@@ -1,8 +1,24 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import netflixLogo from "../assets/netflix-logo.png";
+import { useSelector } from "react-redux";
+import userSlice from "../utils/userSlice";
+import { getAuth, signOut } from "firebase/auth";
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleSignout = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        console.log("signed out");
+        navigate("/signin");
+      })
+      .catch((error) => {
+        console.log("An error happened.");
+      });
+  };
 
   return (
     <div className="relative z-10 ">
@@ -17,6 +33,13 @@ const Header = () => {
             {location.pathname == "/signup" ? "Sign in" : "Sign up"}
           </button>
         </Link>
+
+        <button
+          className="bg-[#c11119] text-white text-sm md:text-base font-medium px-4 py-1.5 rounded-sm shadow-lg"
+          onClick={handleSignout}
+        >
+          Sign Out
+        </button>
       </div>
     </div>
   );
