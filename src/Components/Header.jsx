@@ -1,12 +1,28 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import netflixLogo from "../assets/netflix-logo.png";
-import { useSelector } from "react-redux";
-import userSlice from "../utils/userSlice";
-import { getAuth, signOut } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import userSlice, { addUser, removeUser } from "../utils/userSlice";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+  const auth = getAuth();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { name, uid, email } = user;
+        dispatch(addUser({ uid, email }));
+        setUser(user);
+      } else {
+        dispatch(removeUser());
+      }
+    });
+  }, []);
 
   const handleSignout = () => {
     const auth = getAuth();
@@ -34,12 +50,20 @@ const Header = () => {
           </button>
         </Link>
 
-        <button
-          className="bg-[#c11119] text-white text-sm md:text-base font-medium px-4 py-1.5 rounded-sm shadow-lg"
-          onClick={handleSignout}
-        >
-          Sign Out
-        </button>
+        <Link to="/signin">
+          <button className="bg-[#c11119] text-white text-sm md:text-base font-medium px-4 py-1.5 rounded-sm shadow-lg">
+            Sign in
+          </button>
+        </Link>
+
+        {user && (
+          <button
+            className="bg-[#c11119] text-white text-sm md:text-base font-medium px-4 py-1.5 rounded-sm shadow-lg"
+            onClick={handleSignout}
+          >
+            Sign Out
+          </button>
+        )}
       </div>
     </div>
   );
