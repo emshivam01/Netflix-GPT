@@ -1,17 +1,29 @@
+import { useEffect } from "react";
 import Header from "./Header";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { options } from "../utils/constants";
+import { useDispatch } from "react-redux";
 
 const Browse = () => {
-  const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      console.log(uid);
-    } else {
-      console.log("No user found");
-    }
-  });
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch(
+          "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
+          options
+        );
+        const movies = await response.json();
+        // Do something with the fetched movies
+        console.log(movies);
+      } catch (error) {
+        // Handle errors
+        console.error("Error fetching movies:", error);
+      }
+    };
+
+    fetchMovies();
+  }, []);
 
   return (
     <div>
