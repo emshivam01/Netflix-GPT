@@ -8,27 +8,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Signin from "./Components/Signin";
 import Browse from "./Components/Browse.jsx";
 
-const appRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "/signup",
-    element: <Signup />,
-  },
-  {
-    path: "/signin",
-    element: <Signin />,
-  },
-  {
-    path: "/browse",
-    element: <Browse />,
-  },
-]);
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={appRouter} />
+    <App />
   </React.StrictMode>
 );

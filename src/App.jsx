@@ -12,10 +12,10 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 function App() {
   return (
-    <Provider store={appStore}>
+    <>
       <Header />
       <Body />
-    </Provider>
+    </>
   );
 }
 
