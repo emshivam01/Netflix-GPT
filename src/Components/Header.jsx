@@ -9,7 +9,7 @@ const Header = () => {
 
   return (
     <div className="relative z-10 ">
-      <div className="absolute flex justify-between items-center w-full px-5 py-6 md:px-16 lg:px-52">
+      <div className="absolute flex justify-between items-center w-full px-5 py-6 md:px-16 lg:px-20">
         <img src={netflixLogo} alt="Netflix Logo" className="h-16 md:h-20" />
 
         {user && (
